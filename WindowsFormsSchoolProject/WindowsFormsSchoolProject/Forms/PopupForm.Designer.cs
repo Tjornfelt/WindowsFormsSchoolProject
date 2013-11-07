@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsSchoolProject
+﻿namespace WindowsFormsSchoolProject.Forms
 {
     partial class PopupForm
     {

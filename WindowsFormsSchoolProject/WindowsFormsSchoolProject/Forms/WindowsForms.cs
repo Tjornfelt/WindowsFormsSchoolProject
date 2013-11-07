@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
-namespace WindowsFormsSchoolProject
+namespace WindowsFormsSchoolProject.Forms
 {
     public partial class WindowsForms : Form
     {
@@ -49,6 +49,10 @@ namespace WindowsFormsSchoolProject
         {
             PopupForm popup = new PopupForm();
 
+            popup.Text = "Gem fil";
+
+            popup.Size = new Size(410, 150);
+
             DialogResult dResult = popup.ShowDialog();
 
             if (dResult == DialogResult.OK)
@@ -82,6 +86,7 @@ namespace WindowsFormsSchoolProject
                 {
                     String line = sr.ReadToEnd();
                     scRichText.Text += line;
+                    filename.Text = scOpenFileDialog.SafeFileName;
                 }
             }
             catch (Exception ex)
@@ -96,5 +101,17 @@ namespace WindowsFormsSchoolProject
         {
             scOpenFileDialog.ShowDialog();
         }
+
+        private void mcCustomControl_Click(object sender, EventArgs e)
+        {
+            CustomControlsForm customControlsForm = new CustomControlsForm();
+
+            customControlsForm.Text = "Custom Controls!";
+
+            customControlsForm.Size = new Size(300, 300);
+
+            DialogResult dResult = customControlsForm.ShowDialog();
+        }
+
     }
 }
