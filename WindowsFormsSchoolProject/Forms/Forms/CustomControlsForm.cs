@@ -16,5 +16,10 @@ namespace WindowsFormsSchoolProject.Forms
         {
             InitializeComponent();
         }
+
+        private void superButton1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

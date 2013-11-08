@@ -39,6 +39,7 @@
             this.superButton1.TabIndex = 0;
             this.superButton1.Text = "superButton1";
             this.superButton1.UseVisualStyleBackColor = true;
+            this.superButton1.Click += new System.EventHandler(this.superButton1_Click);
             // 
             // CustomControlsForm
             // 
