@@ -42,19 +42,26 @@ namespace WindowsFormsSchoolProject.Forms
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mcMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.mcCustomControl = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.Xml = new System.Windows.Forms.TabPage();
             this.scOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.GenerateRawXml = new System.Windows.Forms.Button();
+            this.xmlTextBox = new System.Windows.Forms.RichTextBox();
+            this.SaveXml = new System.Windows.Forms.Button();
+            this.ReadXml = new System.Windows.Forms.Button();
+            this.mDIFormsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Print = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.Xml.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.Xml);
             this.tabControl1.Location = new System.Drawing.Point(13, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -63,6 +70,7 @@ namespace WindowsFormsSchoolProject.Forms
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.Print);
             this.tabPage1.Controls.Add(this.filename);
             this.tabPage1.Controls.Add(this.scOpenFile);
             this.tabPage1.Controls.Add(this.scClear);
@@ -158,7 +166,8 @@ namespace WindowsFormsSchoolProject.Forms
             // mcMenuItem1
             // 
             this.mcMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mcCustomControl});
+            this.mcCustomControl,
+            this.mDIFormsToolStripMenuItem});
             this.mcMenuItem1.Name = "mcMenuItem1";
             this.mcMenuItem1.Size = new System.Drawing.Size(86, 20);
             this.mcMenuItem1.Text = "Menu Item 1";
@@ -170,20 +179,79 @@ namespace WindowsFormsSchoolProject.Forms
             this.mcCustomControl.Text = "Custom Control";
             this.mcCustomControl.Click += new System.EventHandler(this.mcCustomControl_Click);
             // 
-            // tabPage3
+            // Xml
             // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(708, 419);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "tabPage3";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.Xml.Controls.Add(this.ReadXml);
+            this.Xml.Controls.Add(this.SaveXml);
+            this.Xml.Controls.Add(this.xmlTextBox);
+            this.Xml.Controls.Add(this.GenerateRawXml);
+            this.Xml.Location = new System.Drawing.Point(4, 22);
+            this.Xml.Name = "Xml";
+            this.Xml.Padding = new System.Windows.Forms.Padding(3);
+            this.Xml.Size = new System.Drawing.Size(708, 419);
+            this.Xml.TabIndex = 2;
+            this.Xml.Text = "Xml";
+            this.Xml.UseVisualStyleBackColor = true;
             // 
             // scOpenFileDialog
             // 
             this.scOpenFileDialog.FileName = "openFileDialog1";
             this.scOpenFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.scOpenFileDialog_FileOk);
+            // 
+            // GenerateRawXml
+            // 
+            this.GenerateRawXml.Location = new System.Drawing.Point(7, 7);
+            this.GenerateRawXml.Name = "GenerateRawXml";
+            this.GenerateRawXml.Size = new System.Drawing.Size(189, 23);
+            this.GenerateRawXml.TabIndex = 0;
+            this.GenerateRawXml.Text = "Generate Raw Xml";
+            this.GenerateRawXml.UseVisualStyleBackColor = true;
+            this.GenerateRawXml.Click += new System.EventHandler(this.GenerateRawXml_Click);
+            // 
+            // xmlTextBox
+            // 
+            this.xmlTextBox.Location = new System.Drawing.Point(202, 6);
+            this.xmlTextBox.Name = "xmlTextBox";
+            this.xmlTextBox.Size = new System.Drawing.Size(500, 376);
+            this.xmlTextBox.TabIndex = 1;
+            this.xmlTextBox.Text = "";
+            // 
+            // SaveXml
+            // 
+            this.SaveXml.Location = new System.Drawing.Point(593, 389);
+            this.SaveXml.Name = "SaveXml";
+            this.SaveXml.Size = new System.Drawing.Size(108, 23);
+            this.SaveXml.TabIndex = 2;
+            this.SaveXml.Text = "Save Xml File";
+            this.SaveXml.UseVisualStyleBackColor = true;
+            this.SaveXml.Click += new System.EventHandler(this.SaveXml_Click);
+            // 
+            // ReadXml
+            // 
+            this.ReadXml.Location = new System.Drawing.Point(7, 37);
+            this.ReadXml.Name = "ReadXml";
+            this.ReadXml.Size = new System.Drawing.Size(189, 23);
+            this.ReadXml.TabIndex = 3;
+            this.ReadXml.Text = "Read Xml File";
+            this.ReadXml.UseVisualStyleBackColor = true;
+            this.ReadXml.Click += new System.EventHandler(this.ReadXml_Click);
+            // 
+            // mDIFormsToolStripMenuItem
+            // 
+            this.mDIFormsToolStripMenuItem.Name = "mDIFormsToolStripMenuItem";
+            this.mDIFormsToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.mDIFormsToolStripMenuItem.Text = "MDI forms";
+            this.mDIFormsToolStripMenuItem.Click += new System.EventHandler(this.mDIFormsToolStripMenuItem_Click);
+            // 
+            // Print
+            // 
+            this.Print.Location = new System.Drawing.Point(7, 66);
+            this.Print.Name = "Print";
+            this.Print.Size = new System.Drawing.Size(181, 23);
+            this.Print.TabIndex = 6;
+            this.Print.Text = "Print";
+            this.Print.UseVisualStyleBackColor = true;
+            this.Print.Click += new System.EventHandler(this.Print_Click);
             // 
             // WindowsForms
             // 
@@ -202,6 +270,7 @@ namespace WindowsFormsSchoolProject.Forms
             this.tabPage2.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.Xml.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -211,7 +280,7 @@ namespace WindowsFormsSchoolProject.Forms
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage Xml;
         private System.Windows.Forms.Button scClickMe;
         private System.Windows.Forms.RichTextBox scRichText;
         private System.Windows.Forms.Button scSave;
@@ -222,6 +291,12 @@ namespace WindowsFormsSchoolProject.Forms
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem mcMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem mcCustomControl;
+        private System.Windows.Forms.Button ReadXml;
+        private System.Windows.Forms.Button SaveXml;
+        private System.Windows.Forms.RichTextBox xmlTextBox;
+        private System.Windows.Forms.Button GenerateRawXml;
+        private System.Windows.Forms.ToolStripMenuItem mDIFormsToolStripMenuItem;
+        private System.Windows.Forms.Button Print;
 
     }
 }

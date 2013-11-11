@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Xml;
+using System.Drawing.Printing;
 
 namespace WindowsFormsSchoolProject.Forms
 {
@@ -18,6 +20,7 @@ namespace WindowsFormsSchoolProject.Forms
         string folderName;
         string folderPath;
         string filePath;
+        XmlDocument doc = new XmlDocument();
 
         public WindowsForms()
         {
@@ -113,5 +116,92 @@ namespace WindowsFormsSchoolProject.Forms
             DialogResult dResult = customControlsForm.ShowDialog();
         }
 
+        private void GenerateRawXml_Click(object sender, EventArgs e)
+        {
+            XmlDocument newDoc = new XmlDocument();
+            XmlElement el = (XmlElement)newDoc.AppendChild(newDoc.CreateElement("RootElement"));
+            el.SetAttribute("Attribute1", "Value");
+            el.AppendChild(newDoc.CreateElement("NestedElement")).InnerText = "InnerTextValue1";
+            el.AppendChild(newDoc.CreateElement("NestedElement")).InnerText = "InnerTextValue2";
+            xmlTextBox.Text = BeautifyXml.Beautify(newDoc);
+        }
+
+        private void SaveXml_Click(object sender, EventArgs e)
+        {
+            //Save the text into a new xml string.
+            string xmlString = xmlTextBox.Text;
+
+            doc.LoadXml(xmlString);
+        }
+
+        private void ReadXml_Click(object sender, EventArgs e)
+        {
+            //Clear the textbox.
+            xmlTextBox.Text = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(doc.OuterXml))
+            {
+                XmlNodeList xnList = doc.SelectNodes("/RootElement/NestedElement");
+                foreach (XmlNode xn in xnList)
+                {
+                    string nestedElement = xn.InnerText;
+                    xmlTextBox.Text += "NestedElement Value: " + nestedElement + Environment.NewLine;
+                }
+            }
+            else
+            {
+                xmlTextBox.Text = "Remember to generate the xml first!";
+            }
+        }
+
+        private void mDIFormsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MDIparent mdiParent = new MDIparent();
+
+            mdiParent.Text = "MDI parent";
+
+            mdiParent.Size = new Size(500,500);
+
+            mdiParent.Show();
+            
+        }
+
+        private void Print_Click(object sender, EventArgs e)
+        {
+            PrintDialog printDialog = new PrintDialog();
+            //printDialog.ShowDialog();
+
+            PrintDocument printDocument = new PrintDocument();
+
+            printDialog.Document = printDocument;
+
+            printDocument.PrintPage += new PrintPageEventHandler(printDocument_PrintPage);
+
+            DialogResult result = printDialog.ShowDialog();
+
+            if(result == DialogResult.OK)
+            {
+                printDocument.Print();
+            }
+            
+        }
+
+        void printDocument_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            Graphics graphic = e.Graphics;
+
+            Font font = new Font("Courier New", 12);
+
+            float fontHeight = font.GetHeight();
+
+            int startX = 10;
+            int startY = 10;
+            int offset = 40;
+
+            graphic.DrawString(scText, new Font("Courier New", 18), new SolidBrush(Color.Black), startX, startY);
+
+
+
+        }
     }
 }
