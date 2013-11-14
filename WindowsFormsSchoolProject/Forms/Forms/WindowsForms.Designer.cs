@@ -32,6 +32,7 @@ namespace WindowsFormsSchoolProject.Forms
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.printPreview = new System.Windows.Forms.Button();
             this.Print = new System.Windows.Forms.Button();
             this.filename = new System.Windows.Forms.Label();
             this.scOpenFile = new System.Windows.Forms.Button();
@@ -50,7 +51,7 @@ namespace WindowsFormsSchoolProject.Forms
             this.xmlTextBox = new System.Windows.Forms.RichTextBox();
             this.GenerateRawXml = new System.Windows.Forms.Button();
             this.scOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.printPreview = new System.Windows.Forms.Button();
+            this.showUsers = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -71,6 +72,7 @@ namespace WindowsFormsSchoolProject.Forms
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.showUsers);
             this.tabPage1.Controls.Add(this.printPreview);
             this.tabPage1.Controls.Add(this.Print);
             this.tabPage1.Controls.Add(this.filename);
@@ -86,6 +88,16 @@ namespace WindowsFormsSchoolProject.Forms
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Simple Controls";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // printPreview
+            // 
+            this.printPreview.Location = new System.Drawing.Point(6, 95);
+            this.printPreview.Name = "printPreview";
+            this.printPreview.Size = new System.Drawing.Size(182, 23);
+            this.printPreview.TabIndex = 7;
+            this.printPreview.Text = "Print with preview";
+            this.printPreview.UseVisualStyleBackColor = true;
+            this.printPreview.Click += new System.EventHandler(this.printPreview_Click);
             // 
             // Print
             // 
@@ -255,15 +267,15 @@ namespace WindowsFormsSchoolProject.Forms
             this.scOpenFileDialog.FileName = "openFileDialog1";
             this.scOpenFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.scOpenFileDialog_FileOk);
             // 
-            // printPreview
+            // showUsers
             // 
-            this.printPreview.Location = new System.Drawing.Point(6, 95);
-            this.printPreview.Name = "printPreview";
-            this.printPreview.Size = new System.Drawing.Size(182, 23);
-            this.printPreview.TabIndex = 7;
-            this.printPreview.Text = "Print with preview";
-            this.printPreview.UseVisualStyleBackColor = true;
-            this.printPreview.Click += new System.EventHandler(this.printPreview_Click);
+            this.showUsers.Location = new System.Drawing.Point(7, 124);
+            this.showUsers.Name = "showUsers";
+            this.showUsers.Size = new System.Drawing.Size(181, 23);
+            this.showUsers.TabIndex = 8;
+            this.showUsers.Text = "Show All Users";
+            this.showUsers.UseVisualStyleBackColor = true;
+            this.showUsers.Click += new System.EventHandler(this.showUsers_Click);
             // 
             // WindowsForms
             // 
@@ -310,6 +322,7 @@ namespace WindowsFormsSchoolProject.Forms
         private System.Windows.Forms.ToolStripMenuItem mDIFormsToolStripMenuItem;
         private System.Windows.Forms.Button Print;
         private System.Windows.Forms.Button printPreview;
+        private System.Windows.Forms.Button showUsers;
 
     }
 }

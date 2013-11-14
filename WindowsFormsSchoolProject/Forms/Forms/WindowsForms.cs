@@ -220,5 +220,17 @@ namespace WindowsFormsSchoolProject.Forms
                 }
             }
         }
+
+        private void showUsers_Click(object sender, EventArgs e)
+        {
+            Entity en = new Entity();
+
+            List<User> userList = en.GetAllUsers();
+
+            foreach (var item in userList)
+	        {
+                scRichText.Text += item.username + Environment.NewLine;
+	        }
+        }
     }
 }
