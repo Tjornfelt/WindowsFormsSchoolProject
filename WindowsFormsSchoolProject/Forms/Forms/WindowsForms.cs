@@ -169,7 +169,6 @@ namespace WindowsFormsSchoolProject.Forms
         private void Print_Click(object sender, EventArgs e)
         {
             PrintDialog printDialog = new PrintDialog();
-            //printDialog.ShowDialog();
 
             PrintDocument printDocument = new PrintDocument();
 
@@ -192,16 +191,34 @@ namespace WindowsFormsSchoolProject.Forms
 
             Font font = new Font("Courier New", 12);
 
-            float fontHeight = font.GetHeight();
+            int startX = 20;
+            int startY = 20;
 
-            int startX = 10;
-            int startY = 10;
-            int offset = 40;
+            graphic.DrawString(scText, font, new SolidBrush(Color.Black), startX, startY);
+        }
 
-            graphic.DrawString(scText, new Font("Courier New", 18), new SolidBrush(Color.Black), startX, startY);
+        private void printPreview_Click(object sender, EventArgs e)
+        {
+            PageSetupDialog pageSetupDialog = new PageSetupDialog();                        //Sets up a "standard" print preview page.
+            PrintDocument printDocument = new PrintDocument();                              //Create the actual document.
+            printDocument.PrintPage += printDocument_PrintPage; //Set up the printpage: content, font-size etc.  This is an eventhandler. Create a new eventhandler, and specify the function to call when triggered.           
+            pageSetupDialog.Document = printDocument;                                       //Save the printDocument object into the pageSetupDialog.Document object.              
+            DialogResult setupResult = pageSetupDialog.ShowDialog();                        //Show the pageSetupDialog and save the users choice.
 
+            //User clicks 'OK'
+            if (setupResult == DialogResult.OK)
+            {
+                PrintDialog printDialog = new PrintDialog();                                //Create a new PrintDialog object.
+                printDialog.Document = pageSetupDialog.Document;                            //Save the document previously created using the PageSetupDialog into the PrintDialog
 
+                DialogResult printResult = printDialog.ShowDialog();                        //Show the PrintDialog and save the users choice.
 
+                //User clicks 'OK'
+                if (printResult == DialogResult.OK)                                         
+                {
+                    printDialog.Document.Print();                                           //Use the PrintDialog to print the page. The Document has been thrown from object to object and now needs to be printed.
+                }
+            }
         }
     }
 }
