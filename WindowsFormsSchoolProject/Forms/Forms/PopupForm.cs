@@ -28,5 +28,20 @@ namespace WindowsFormsSchoolProject.Forms
         {
             fileName = @"\" + pFileName.Text + ".txt";
         }
+
+        private void ok_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ok_MouseHover(object sender, EventArgs e)
+        {
+            fLabel.Text = "OK! - Message on hover!";
+        }
+
+        private void cancel_MouseHover(object sender, EventArgs e)
+        {
+            fLabel.Text = "Cancel! - Message on hover!";
+        }
     }
 }

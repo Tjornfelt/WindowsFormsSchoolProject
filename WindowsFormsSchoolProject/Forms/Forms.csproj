@@ -146,6 +146,9 @@
     <EmbeddedResource Include="Forms\CustomControlsForm.resx">
       <DependentUpon>CustomControlsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MDIchild.resx">
+      <DependentUpon>MDIchild.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MDIparent.resx">
       <DependentUpon>MDIparent.cs</DependentUpon>
     </EmbeddedResource>
@@ -184,6 +187,8 @@
       <LastGenOutput>Model1.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\school_windowsformsEntities1.datasource" />
+    <None Include="Properties\DataSources\User.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

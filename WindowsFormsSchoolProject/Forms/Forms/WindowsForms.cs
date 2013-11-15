@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Xml;
 using System.Drawing.Printing;
+using System.Diagnostics;
 
 namespace WindowsFormsSchoolProject.Forms
 {
@@ -36,6 +37,10 @@ namespace WindowsFormsSchoolProject.Forms
             folderName = @"\UserFiles";
             folderPath = appPath + folderName;
             scOpenFileDialog.InitialDirectory = folderPath;
+
+            Entity en = new Entity();
+            List<User> userList = en.GetAllUsers();
+            dataGridView1.DataSource = userList;
         }
 
         private void scClickMe_Click(object sender, EventArgs e)
@@ -231,6 +236,33 @@ namespace WindowsFormsSchoolProject.Forms
 	        {
                 scRichText.Text += item.username + Environment.NewLine;
 	        }
+        }
+
+        private void scClickMe_MouseHover(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolTip1_Popup(object sender, PopupEventArgs e)
+        {
+
+        }
+
+        private void onscreenKeyboard_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start("OSK.exe");
+            }
+            catch (Exception error)
+            {
+                string err = error.ToString();
+            }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

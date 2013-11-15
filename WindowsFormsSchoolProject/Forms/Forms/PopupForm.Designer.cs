@@ -32,6 +32,7 @@
             this.pFileName = new System.Windows.Forms.TextBox();
             this.ok = new System.Windows.Forms.Button();
             this.cancel = new System.Windows.Forms.Button();
+            this.fLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // FileLabel
@@ -60,6 +61,8 @@
             this.ok.TabIndex = 2;
             this.ok.Text = "OK";
             this.ok.UseVisualStyleBackColor = true;
+            this.ok.Click += new System.EventHandler(this.ok_Click);
+            this.ok.MouseHover += new System.EventHandler(this.ok_MouseHover);
             // 
             // cancel
             // 
@@ -70,12 +73,22 @@
             this.cancel.TabIndex = 3;
             this.cancel.Text = "Cancel";
             this.cancel.UseVisualStyleBackColor = true;
+            this.cancel.MouseHover += new System.EventHandler(this.cancel_MouseHover);
+            // 
+            // fLabel
+            // 
+            this.fLabel.AutoSize = true;
+            this.fLabel.Location = new System.Drawing.Point(16, 87);
+            this.fLabel.Name = "fLabel";
+            this.fLabel.Size = new System.Drawing.Size(0, 13);
+            this.fLabel.TabIndex = 4;
             // 
             // PopupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(390, 98);
+            this.ClientSize = new System.Drawing.Size(390, 107);
+            this.Controls.Add(this.fLabel);
             this.Controls.Add(this.cancel);
             this.Controls.Add(this.ok);
             this.Controls.Add(this.pFileName);
@@ -94,5 +107,6 @@
         private System.Windows.Forms.TextBox pFileName;
         private System.Windows.Forms.Button ok;
         private System.Windows.Forms.Button cancel;
+        private System.Windows.Forms.Label fLabel;
     }
 }

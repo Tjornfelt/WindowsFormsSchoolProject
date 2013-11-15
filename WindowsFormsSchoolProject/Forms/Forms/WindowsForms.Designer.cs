@@ -30,8 +30,10 @@ namespace WindowsFormsSchoolProject.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.showUsers = new System.Windows.Forms.Button();
             this.printPreview = new System.Windows.Forms.Button();
             this.Print = new System.Windows.Forms.Button();
             this.filename = new System.Windows.Forms.Label();
@@ -51,12 +53,30 @@ namespace WindowsFormsSchoolProject.Forms
             this.xmlTextBox = new System.Windows.Forms.RichTextBox();
             this.GenerateRawXml = new System.Windows.Forms.Button();
             this.scOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.showUsers = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.onscreenKeyboard = new System.Windows.Forms.Button();
+            this.dataGrid = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.usernameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.emailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.schoolwindowsformsEntities1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.schoolwindowsformsEntities1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.userBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.Xml.SuspendLayout();
+            this.dataGrid.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.schoolwindowsformsEntities1BindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.schoolwindowsformsEntities1BindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource2)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -64,6 +84,7 @@ namespace WindowsFormsSchoolProject.Forms
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.Xml);
+            this.tabControl1.Controls.Add(this.dataGrid);
             this.tabControl1.Location = new System.Drawing.Point(13, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -72,6 +93,7 @@ namespace WindowsFormsSchoolProject.Forms
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.onscreenKeyboard);
             this.tabPage1.Controls.Add(this.showUsers);
             this.tabPage1.Controls.Add(this.printPreview);
             this.tabPage1.Controls.Add(this.Print);
@@ -89,6 +111,17 @@ namespace WindowsFormsSchoolProject.Forms
             this.tabPage1.Text = "Simple Controls";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // showUsers
+            // 
+            this.showUsers.Location = new System.Drawing.Point(7, 124);
+            this.showUsers.Name = "showUsers";
+            this.showUsers.Size = new System.Drawing.Size(181, 23);
+            this.showUsers.TabIndex = 8;
+            this.showUsers.Text = "Show All Users";
+            this.toolTip1.SetToolTip(this.showUsers, "Shows all users in the database");
+            this.showUsers.UseVisualStyleBackColor = true;
+            this.showUsers.Click += new System.EventHandler(this.showUsers_Click);
+            // 
             // printPreview
             // 
             this.printPreview.Location = new System.Drawing.Point(6, 95);
@@ -96,6 +129,7 @@ namespace WindowsFormsSchoolProject.Forms
             this.printPreview.Size = new System.Drawing.Size(182, 23);
             this.printPreview.TabIndex = 7;
             this.printPreview.Text = "Print with preview";
+            this.toolTip1.SetToolTip(this.printPreview, "Prints current text, with a preview.");
             this.printPreview.UseVisualStyleBackColor = true;
             this.printPreview.Click += new System.EventHandler(this.printPreview_Click);
             // 
@@ -106,6 +140,7 @@ namespace WindowsFormsSchoolProject.Forms
             this.Print.Size = new System.Drawing.Size(181, 23);
             this.Print.TabIndex = 6;
             this.Print.Text = "Print";
+            this.toolTip1.SetToolTip(this.Print, "Prints current text in the textbox");
             this.Print.UseVisualStyleBackColor = true;
             this.Print.Click += new System.EventHandler(this.Print_Click);
             // 
@@ -124,6 +159,7 @@ namespace WindowsFormsSchoolProject.Forms
             this.scOpenFile.Size = new System.Drawing.Size(181, 23);
             this.scOpenFile.TabIndex = 4;
             this.scOpenFile.Text = "Open File";
+            this.toolTip1.SetToolTip(this.scOpenFile, "Opens a file. A Dialog to select the file will appear.");
             this.scOpenFile.UseVisualStyleBackColor = true;
             this.scOpenFile.Click += new System.EventHandler(this.scOpenFile_Click);
             // 
@@ -163,8 +199,10 @@ namespace WindowsFormsSchoolProject.Forms
             this.scClickMe.Size = new System.Drawing.Size(182, 23);
             this.scClickMe.TabIndex = 0;
             this.scClickMe.Text = "Click me!";
+            this.toolTip1.SetToolTip(this.scClickMe, "Click here to generate some text!");
             this.scClickMe.UseVisualStyleBackColor = true;
             this.scClickMe.Click += new System.EventHandler(this.scClickMe_Click);
+            this.scClickMe.MouseHover += new System.EventHandler(this.scClickMe_MouseHover);
             // 
             // tabPage2
             // 
@@ -267,15 +305,84 @@ namespace WindowsFormsSchoolProject.Forms
             this.scOpenFileDialog.FileName = "openFileDialog1";
             this.scOpenFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.scOpenFileDialog_FileOk);
             // 
-            // showUsers
+            // toolTip1
             // 
-            this.showUsers.Location = new System.Drawing.Point(7, 124);
-            this.showUsers.Name = "showUsers";
-            this.showUsers.Size = new System.Drawing.Size(181, 23);
-            this.showUsers.TabIndex = 8;
-            this.showUsers.Text = "Show All Users";
-            this.showUsers.UseVisualStyleBackColor = true;
-            this.showUsers.Click += new System.EventHandler(this.showUsers_Click);
+            this.toolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTip1_Popup);
+            // 
+            // onscreenKeyboard
+            // 
+            this.onscreenKeyboard.Location = new System.Drawing.Point(10, 154);
+            this.onscreenKeyboard.Name = "onscreenKeyboard";
+            this.onscreenKeyboard.Size = new System.Drawing.Size(178, 23);
+            this.onscreenKeyboard.TabIndex = 9;
+            this.onscreenKeyboard.Text = "Onscreen Keyboard!";
+            this.toolTip1.SetToolTip(this.onscreenKeyboard, "Opens an onscreen keyboard!");
+            this.onscreenKeyboard.UseVisualStyleBackColor = true;
+            this.onscreenKeyboard.Click += new System.EventHandler(this.onscreenKeyboard_Click);
+            // 
+            // dataGrid
+            // 
+            this.dataGrid.Controls.Add(this.dataGridView1);
+            this.dataGrid.Location = new System.Drawing.Point(4, 22);
+            this.dataGrid.Name = "dataGrid";
+            this.dataGrid.Padding = new System.Windows.Forms.Padding(3);
+            this.dataGrid.Size = new System.Drawing.Size(708, 419);
+            this.dataGrid.TabIndex = 3;
+            this.dataGrid.Text = "Data Grid";
+            this.dataGrid.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idDataGridViewTextBoxColumn,
+            this.usernameDataGridViewTextBoxColumn,
+            this.emailDataGridViewTextBoxColumn});
+            this.dataGridView1.DataSource = this.userBindingSource2;
+            this.dataGridView1.Location = new System.Drawing.Point(6, 6);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(696, 150);
+            this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            // 
+            // usernameDataGridViewTextBoxColumn
+            // 
+            this.usernameDataGridViewTextBoxColumn.DataPropertyName = "username";
+            this.usernameDataGridViewTextBoxColumn.HeaderText = "username";
+            this.usernameDataGridViewTextBoxColumn.Name = "usernameDataGridViewTextBoxColumn";
+            // 
+            // emailDataGridViewTextBoxColumn
+            // 
+            this.emailDataGridViewTextBoxColumn.DataPropertyName = "email";
+            this.emailDataGridViewTextBoxColumn.HeaderText = "email";
+            this.emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
+            // 
+            // userBindingSource1
+            // 
+            this.userBindingSource1.DataSource = typeof(WindowsFormsSchoolProject.User);
+            // 
+            // userBindingSource
+            // 
+            this.userBindingSource.DataSource = typeof(WindowsFormsSchoolProject.User);
+            // 
+            // schoolwindowsformsEntities1BindingSource
+            // 
+            this.schoolwindowsformsEntities1BindingSource.DataSource = typeof(WindowsFormsSchoolProject.school_windowsformsEntities1);
+            // 
+            // schoolwindowsformsEntities1BindingSource1
+            // 
+            this.schoolwindowsformsEntities1BindingSource1.DataSource = typeof(WindowsFormsSchoolProject.school_windowsformsEntities1);
+            // 
+            // userBindingSource2
+            // 
+            this.userBindingSource2.DataSource = typeof(WindowsFormsSchoolProject.User);
             // 
             // WindowsForms
             // 
@@ -295,6 +402,13 @@ namespace WindowsFormsSchoolProject.Forms
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.Xml.ResumeLayout(false);
+            this.dataGrid.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.schoolwindowsformsEntities1BindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.schoolwindowsformsEntities1BindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -323,6 +437,18 @@ namespace WindowsFormsSchoolProject.Forms
         private System.Windows.Forms.Button Print;
         private System.Windows.Forms.Button printPreview;
         private System.Windows.Forms.Button showUsers;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button onscreenKeyboard;
+        private System.Windows.Forms.TabPage dataGrid;
+        private System.Windows.Forms.BindingSource schoolwindowsformsEntities1BindingSource;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn usernameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource userBindingSource;
+        private System.Windows.Forms.BindingSource schoolwindowsformsEntities1BindingSource1;
+        private System.Windows.Forms.BindingSource userBindingSource1;
+        private System.Windows.Forms.BindingSource userBindingSource2;
 
     }
 }
