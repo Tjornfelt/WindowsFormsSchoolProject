@@ -33,6 +33,7 @@ namespace WindowsFormsSchoolProject.Forms
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.onscreenKeyboard = new System.Windows.Forms.Button();
             this.showUsers = new System.Windows.Forms.Button();
             this.printPreview = new System.Windows.Forms.Button();
             this.Print = new System.Windows.Forms.Button();
@@ -52,19 +53,26 @@ namespace WindowsFormsSchoolProject.Forms
             this.SaveXml = new System.Windows.Forms.Button();
             this.xmlTextBox = new System.Windows.Forms.RichTextBox();
             this.GenerateRawXml = new System.Windows.Forms.Button();
+            this.dataGrid = new System.Windows.Forms.TabPage();
+            this.btn_editUser = new System.Windows.Forms.Button();
+            this.deleteUser = new System.Windows.Forms.Button();
+            this.update = new System.Windows.Forms.Button();
+            this.newUser = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.scOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.onscreenKeyboard = new System.Windows.Forms.Button();
-            this.dataGrid = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btn_backgroundWorker = new System.Windows.Forms.Button();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.usernameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.emailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.userBindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.userBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.schoolwindowsformsEntities1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.schoolwindowsformsEntities1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.userBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -72,11 +80,12 @@ namespace WindowsFormsSchoolProject.Forms
             this.Xml.SuspendLayout();
             this.dataGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.schoolwindowsformsEntities1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.schoolwindowsformsEntities1BindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource2)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -93,6 +102,8 @@ namespace WindowsFormsSchoolProject.Forms
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.progressBar1);
+            this.tabPage1.Controls.Add(this.btn_backgroundWorker);
             this.tabPage1.Controls.Add(this.onscreenKeyboard);
             this.tabPage1.Controls.Add(this.showUsers);
             this.tabPage1.Controls.Add(this.printPreview);
@@ -110,6 +121,17 @@ namespace WindowsFormsSchoolProject.Forms
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Simple Controls";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // onscreenKeyboard
+            // 
+            this.onscreenKeyboard.Location = new System.Drawing.Point(10, 154);
+            this.onscreenKeyboard.Name = "onscreenKeyboard";
+            this.onscreenKeyboard.Size = new System.Drawing.Size(178, 23);
+            this.onscreenKeyboard.TabIndex = 9;
+            this.onscreenKeyboard.Text = "Onscreen Keyboard!";
+            this.toolTip1.SetToolTip(this.onscreenKeyboard, "Opens an onscreen keyboard!");
+            this.onscreenKeyboard.UseVisualStyleBackColor = true;
+            this.onscreenKeyboard.Click += new System.EventHandler(this.onscreenKeyboard_Click);
             // 
             // showUsers
             // 
@@ -300,28 +322,12 @@ namespace WindowsFormsSchoolProject.Forms
             this.GenerateRawXml.UseVisualStyleBackColor = true;
             this.GenerateRawXml.Click += new System.EventHandler(this.GenerateRawXml_Click);
             // 
-            // scOpenFileDialog
-            // 
-            this.scOpenFileDialog.FileName = "openFileDialog1";
-            this.scOpenFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.scOpenFileDialog_FileOk);
-            // 
-            // toolTip1
-            // 
-            this.toolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTip1_Popup);
-            // 
-            // onscreenKeyboard
-            // 
-            this.onscreenKeyboard.Location = new System.Drawing.Point(10, 154);
-            this.onscreenKeyboard.Name = "onscreenKeyboard";
-            this.onscreenKeyboard.Size = new System.Drawing.Size(178, 23);
-            this.onscreenKeyboard.TabIndex = 9;
-            this.onscreenKeyboard.Text = "Onscreen Keyboard!";
-            this.toolTip1.SetToolTip(this.onscreenKeyboard, "Opens an onscreen keyboard!");
-            this.onscreenKeyboard.UseVisualStyleBackColor = true;
-            this.onscreenKeyboard.Click += new System.EventHandler(this.onscreenKeyboard_Click);
-            // 
             // dataGrid
             // 
+            this.dataGrid.Controls.Add(this.btn_editUser);
+            this.dataGrid.Controls.Add(this.deleteUser);
+            this.dataGrid.Controls.Add(this.update);
+            this.dataGrid.Controls.Add(this.newUser);
             this.dataGrid.Controls.Add(this.dataGridView1);
             this.dataGrid.Location = new System.Drawing.Point(4, 22);
             this.dataGrid.Name = "dataGrid";
@@ -330,6 +336,46 @@ namespace WindowsFormsSchoolProject.Forms
             this.dataGrid.TabIndex = 3;
             this.dataGrid.Text = "Data Grid";
             this.dataGrid.UseVisualStyleBackColor = true;
+            // 
+            // btn_editUser
+            // 
+            this.btn_editUser.Location = new System.Drawing.Point(169, 390);
+            this.btn_editUser.Name = "btn_editUser";
+            this.btn_editUser.Size = new System.Drawing.Size(75, 23);
+            this.btn_editUser.TabIndex = 4;
+            this.btn_editUser.Text = "Edit User";
+            this.btn_editUser.UseVisualStyleBackColor = true;
+            this.btn_editUser.Click += new System.EventHandler(this.btn_editUser_Click);
+            // 
+            // deleteUser
+            // 
+            this.deleteUser.Location = new System.Drawing.Point(87, 390);
+            this.deleteUser.Name = "deleteUser";
+            this.deleteUser.Size = new System.Drawing.Size(75, 23);
+            this.deleteUser.TabIndex = 3;
+            this.deleteUser.Text = "Delete User";
+            this.deleteUser.UseVisualStyleBackColor = true;
+            this.deleteUser.Click += new System.EventHandler(this.deleteUser_Click);
+            // 
+            // update
+            // 
+            this.update.Location = new System.Drawing.Point(627, 390);
+            this.update.Name = "update";
+            this.update.Size = new System.Drawing.Size(75, 23);
+            this.update.TabIndex = 2;
+            this.update.Text = "Update Grid";
+            this.update.UseVisualStyleBackColor = true;
+            this.update.Click += new System.EventHandler(this.update_Click);
+            // 
+            // newUser
+            // 
+            this.newUser.Location = new System.Drawing.Point(6, 390);
+            this.newUser.Name = "newUser";
+            this.newUser.Size = new System.Drawing.Size(75, 23);
+            this.newUser.TabIndex = 1;
+            this.newUser.Text = "New User";
+            this.newUser.UseVisualStyleBackColor = true;
+            this.newUser.Click += new System.EventHandler(this.newUser_Click);
             // 
             // dataGridView1
             // 
@@ -342,9 +388,42 @@ namespace WindowsFormsSchoolProject.Forms
             this.dataGridView1.DataSource = this.userBindingSource2;
             this.dataGridView1.Location = new System.Drawing.Point(6, 6);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(696, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(696, 378);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // scOpenFileDialog
+            // 
+            this.scOpenFileDialog.FileName = "openFileDialog1";
+            this.scOpenFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.scOpenFileDialog_FileOk);
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTip1_Popup);
+            // 
+            // btn_backgroundWorker
+            // 
+            this.btn_backgroundWorker.Location = new System.Drawing.Point(10, 184);
+            this.btn_backgroundWorker.Name = "btn_backgroundWorker";
+            this.btn_backgroundWorker.Size = new System.Drawing.Size(178, 23);
+            this.btn_backgroundWorker.TabIndex = 10;
+            this.btn_backgroundWorker.Text = "Background Worker Example";
+            this.btn_backgroundWorker.UseVisualStyleBackColor = true;
+            this.btn_backgroundWorker.Click += new System.EventHandler(this.btn_backgroundWorker_Click);
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(10, 214);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(178, 23);
+            this.progressBar1.TabIndex = 11;
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -364,6 +443,14 @@ namespace WindowsFormsSchoolProject.Forms
             this.emailDataGridViewTextBoxColumn.HeaderText = "email";
             this.emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
             // 
+            // userBindingSource2
+            // 
+            this.userBindingSource2.DataSource = typeof(WindowsFormsSchoolProject.User);
+            // 
+            // userBindingSource3
+            // 
+            this.userBindingSource3.DataSource = typeof(WindowsFormsSchoolProject.User);
+            // 
             // userBindingSource1
             // 
             this.userBindingSource1.DataSource = typeof(WindowsFormsSchoolProject.User);
@@ -379,10 +466,6 @@ namespace WindowsFormsSchoolProject.Forms
             // schoolwindowsformsEntities1BindingSource1
             // 
             this.schoolwindowsformsEntities1BindingSource1.DataSource = typeof(WindowsFormsSchoolProject.school_windowsformsEntities1);
-            // 
-            // userBindingSource2
-            // 
-            this.userBindingSource2.DataSource = typeof(WindowsFormsSchoolProject.User);
             // 
             // WindowsForms
             // 
@@ -404,11 +487,12 @@ namespace WindowsFormsSchoolProject.Forms
             this.Xml.ResumeLayout(false);
             this.dataGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.schoolwindowsformsEntities1BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.schoolwindowsformsEntities1BindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -449,6 +533,14 @@ namespace WindowsFormsSchoolProject.Forms
         private System.Windows.Forms.BindingSource schoolwindowsformsEntities1BindingSource1;
         private System.Windows.Forms.BindingSource userBindingSource1;
         private System.Windows.Forms.BindingSource userBindingSource2;
+        private System.Windows.Forms.BindingSource userBindingSource3;
+        private System.Windows.Forms.Button newUser;
+        private System.Windows.Forms.Button update;
+        private System.Windows.Forms.Button deleteUser;
+        private System.Windows.Forms.Button btn_editUser;
+        private System.Windows.Forms.Button btn_backgroundWorker;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ProgressBar progressBar1;
 
     }
 }

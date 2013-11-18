@@ -11,6 +11,9 @@ using System.IO;
 using System.Xml;
 using System.Drawing.Printing;
 using System.Diagnostics;
+using System.Xml.Serialization;
+using WindowsFormsSchoolProject.Helpers;
+using System.Threading;
 
 namespace WindowsFormsSchoolProject.Forms
 {
@@ -22,6 +25,7 @@ namespace WindowsFormsSchoolProject.Forms
         string folderPath;
         string filePath;
         XmlDocument doc = new XmlDocument();
+        bool databaseAvailable;
 
         public WindowsForms()
         {
@@ -39,8 +43,49 @@ namespace WindowsFormsSchoolProject.Forms
             scOpenFileDialog.InitialDirectory = folderPath;
 
             Entity en = new Entity();
-            List<User> userList = en.GetAllUsers();
-            dataGridView1.DataSource = userList;
+
+            databaseAvailable = en.IsDatabaseAvailable();
+
+            //If the database is available...
+            if (databaseAvailable)
+            {
+                //If the users in the database and the xml document differs, update the database with the local data.
+                List<User> xmlUserList = XMLhelpers.FetchUsersFromXml();
+                List<User> userList = en.GetAllUsers();
+
+                bool inSync = true;
+                for (int i = 0; i < xmlUserList.Count(); i++)
+                {
+                    if (xmlUserList[i].username  != userList[i].username || xmlUserList[i].email != userList[i].email || xmlUserList[i].id != userList[i].id)
+                    {
+                        inSync = false;
+                    }
+                }
+
+                if (!inSync)
+                {
+                    MessageBox.Show("Detected unsynced data. Overwriting database with local data.");
+                    en.TruncateTable();
+                    en.PopulateTable(xmlUserList);
+                    userList = en.GetAllUsers();
+                    dataGridView1.DataSource = userList;
+                }
+                else
+                {
+                    dataGridView1.DataSource = userList;
+                }
+                //The database is available, and data has been fetched from it. Now, just save the data into XML so it
+                //is available offline also!
+                XMLhelpers.SaveUsersToXml(userList);
+            }
+            else
+            {
+                this.Text += " - Offline mode";
+                MessageBox.Show("Can't connect to database. Starting in offline mode");
+
+                //In offline mode, all data is loaded from the local xml document.
+                dataGridView1.DataSource = XMLhelpers.FetchUsersFromXml();
+            }
         }
 
         private void scClickMe_Click(object sender, EventArgs e)
@@ -263,6 +308,86 @@ namespace WindowsFormsSchoolProject.Forms
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void newUser_Click(object sender, EventArgs e)
+        {
+            CreateUser createUser = new CreateUser(databaseAvailable);
+
+            DialogResult dResult = createUser.ShowDialog();
+
+            if (dResult == DialogResult.OK)
+            {
+                //TODO confirmation message
+            }
+        }
+
+        private void update_Click(object sender, EventArgs e)
+        {
+            if (databaseAvailable)
+            {
+                Entity en = new Entity();
+                List<User> userList = en.GetAllUsers();
+                dataGridView1.DataSource = userList;
+            }
+            else
+            {
+                dataGridView1.DataSource = XMLhelpers.FetchUsersFromXml();
+            }
+        }
+
+        private void deleteUser_Click(object sender, EventArgs e)
+        {
+            DeleteUser deleteUser = new DeleteUser(databaseAvailable);
+
+            DialogResult dResult = deleteUser.ShowDialog();
+
+            if (dResult == DialogResult.OK)
+            {
+                //TODO confirmation message
+            }
+        }
+
+        private void btn_editUser_Click(object sender, EventArgs e)
+        {
+            EditUser editUser = new EditUser(databaseAvailable);
+
+            DialogResult dResult = editUser.ShowDialog();
+
+            if (dResult == DialogResult.OK)
+            {
+                //TODO confirmation message
+            }
+        }
+
+        private void btn_backgroundWorker_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync();
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            for (var i = 0; i < 10; i++)
+            {
+                Thread.Sleep(100); // 1/10 second.
+                backgroundWorker1.ReportProgress(10);
+            }
+            MessageBox.Show("One second has passed!");
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar1.Value += e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            progressBar1.Value = 0;
         }
     }
 }
