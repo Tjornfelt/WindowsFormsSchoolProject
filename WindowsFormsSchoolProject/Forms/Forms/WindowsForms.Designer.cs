@@ -33,6 +33,9 @@ namespace WindowsFormsSchoolProject.Forms
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btn_asyncTest = new System.Windows.Forms.Button();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.btn_backgroundWorker = new System.Windows.Forms.Button();
             this.onscreenKeyboard = new System.Windows.Forms.Button();
             this.showUsers = new System.Windows.Forms.Button();
             this.printPreview = new System.Windows.Forms.Button();
@@ -61,9 +64,9 @@ namespace WindowsFormsSchoolProject.Forms
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.scOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btn_backgroundWorker = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.btn_changeLanguage = new System.Windows.Forms.Button();
+            this.btn_changeLanguageEnglish = new System.Windows.Forms.Button();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.usernameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.emailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -73,6 +76,7 @@ namespace WindowsFormsSchoolProject.Forms
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.schoolwindowsformsEntities1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.schoolwindowsformsEntities1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.btn_printPreview = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -102,6 +106,10 @@ namespace WindowsFormsSchoolProject.Forms
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btn_printPreview);
+            this.tabPage1.Controls.Add(this.btn_changeLanguageEnglish);
+            this.tabPage1.Controls.Add(this.btn_changeLanguage);
+            this.tabPage1.Controls.Add(this.btn_asyncTest);
             this.tabPage1.Controls.Add(this.progressBar1);
             this.tabPage1.Controls.Add(this.btn_backgroundWorker);
             this.tabPage1.Controls.Add(this.onscreenKeyboard);
@@ -122,9 +130,36 @@ namespace WindowsFormsSchoolProject.Forms
             this.tabPage1.Text = "Simple Controls";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // btn_asyncTest
+            // 
+            this.btn_asyncTest.Location = new System.Drawing.Point(10, 272);
+            this.btn_asyncTest.Name = "btn_asyncTest";
+            this.btn_asyncTest.Size = new System.Drawing.Size(178, 23);
+            this.btn_asyncTest.TabIndex = 12;
+            this.btn_asyncTest.Text = "Async Method";
+            this.btn_asyncTest.UseVisualStyleBackColor = true;
+            this.btn_asyncTest.Click += new System.EventHandler(this.btn_asyncTest_Click);
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(10, 245);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(178, 23);
+            this.progressBar1.TabIndex = 11;
+            // 
+            // btn_backgroundWorker
+            // 
+            this.btn_backgroundWorker.Location = new System.Drawing.Point(10, 215);
+            this.btn_backgroundWorker.Name = "btn_backgroundWorker";
+            this.btn_backgroundWorker.Size = new System.Drawing.Size(178, 23);
+            this.btn_backgroundWorker.TabIndex = 10;
+            this.btn_backgroundWorker.Text = "Background Worker Example";
+            this.btn_backgroundWorker.UseVisualStyleBackColor = true;
+            this.btn_backgroundWorker.Click += new System.EventHandler(this.btn_backgroundWorker_Click);
+            // 
             // onscreenKeyboard
             // 
-            this.onscreenKeyboard.Location = new System.Drawing.Point(10, 154);
+            this.onscreenKeyboard.Location = new System.Drawing.Point(10, 185);
             this.onscreenKeyboard.Name = "onscreenKeyboard";
             this.onscreenKeyboard.Size = new System.Drawing.Size(178, 23);
             this.onscreenKeyboard.TabIndex = 9;
@@ -135,7 +170,7 @@ namespace WindowsFormsSchoolProject.Forms
             // 
             // showUsers
             // 
-            this.showUsers.Location = new System.Drawing.Point(7, 124);
+            this.showUsers.Location = new System.Drawing.Point(7, 155);
             this.showUsers.Name = "showUsers";
             this.showUsers.Size = new System.Drawing.Size(181, 23);
             this.showUsers.TabIndex = 8;
@@ -150,7 +185,7 @@ namespace WindowsFormsSchoolProject.Forms
             this.printPreview.Name = "printPreview";
             this.printPreview.Size = new System.Drawing.Size(182, 23);
             this.printPreview.TabIndex = 7;
-            this.printPreview.Text = "Print with preview";
+            this.printPreview.Text = "Print with preview (pagesetup)";
             this.toolTip1.SetToolTip(this.printPreview, "Prints current text, with a preview.");
             this.printPreview.UseVisualStyleBackColor = true;
             this.printPreview.Click += new System.EventHandler(this.printPreview_Click);
@@ -401,16 +436,6 @@ namespace WindowsFormsSchoolProject.Forms
             // 
             this.toolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTip1_Popup);
             // 
-            // btn_backgroundWorker
-            // 
-            this.btn_backgroundWorker.Location = new System.Drawing.Point(10, 184);
-            this.btn_backgroundWorker.Name = "btn_backgroundWorker";
-            this.btn_backgroundWorker.Size = new System.Drawing.Size(178, 23);
-            this.btn_backgroundWorker.TabIndex = 10;
-            this.btn_backgroundWorker.Text = "Background Worker Example";
-            this.btn_backgroundWorker.UseVisualStyleBackColor = true;
-            this.btn_backgroundWorker.Click += new System.EventHandler(this.btn_backgroundWorker_Click);
-            // 
             // backgroundWorker1
             // 
             this.backgroundWorker1.WorkerReportsProgress = true;
@@ -418,12 +443,25 @@ namespace WindowsFormsSchoolProject.Forms
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // progressBar1
+            // btn_changeLanguage
             // 
-            this.progressBar1.Location = new System.Drawing.Point(10, 214);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(178, 23);
-            this.progressBar1.TabIndex = 11;
+            this.btn_changeLanguage.Location = new System.Drawing.Point(10, 333);
+            this.btn_changeLanguage.Name = "btn_changeLanguage";
+            this.btn_changeLanguage.Size = new System.Drawing.Size(178, 23);
+            this.btn_changeLanguage.TabIndex = 13;
+            this.btn_changeLanguage.Text = "Resource File - Danish";
+            this.btn_changeLanguage.UseVisualStyleBackColor = true;
+            this.btn_changeLanguage.Click += new System.EventHandler(this.btn_changeLanguage_Click);
+            // 
+            // btn_changeLanguageEnglish
+            // 
+            this.btn_changeLanguageEnglish.Location = new System.Drawing.Point(10, 363);
+            this.btn_changeLanguageEnglish.Name = "btn_changeLanguageEnglish";
+            this.btn_changeLanguageEnglish.Size = new System.Drawing.Size(178, 23);
+            this.btn_changeLanguageEnglish.TabIndex = 14;
+            this.btn_changeLanguageEnglish.Text = "Resource File - English";
+            this.btn_changeLanguageEnglish.UseVisualStyleBackColor = true;
+            this.btn_changeLanguageEnglish.Click += new System.EventHandler(this.btn_changeLanguageEnglish_Click);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -466,6 +504,16 @@ namespace WindowsFormsSchoolProject.Forms
             // schoolwindowsformsEntities1BindingSource1
             // 
             this.schoolwindowsformsEntities1BindingSource1.DataSource = typeof(WindowsFormsSchoolProject.school_windowsformsEntities1);
+            // 
+            // btn_printPreview
+            // 
+            this.btn_printPreview.Location = new System.Drawing.Point(10, 125);
+            this.btn_printPreview.Name = "btn_printPreview";
+            this.btn_printPreview.Size = new System.Drawing.Size(178, 23);
+            this.btn_printPreview.TabIndex = 15;
+            this.btn_printPreview.Text = "Print with preview (printpreview)";
+            this.btn_printPreview.UseVisualStyleBackColor = true;
+            this.btn_printPreview.Click += new System.EventHandler(this.btn_printPreview_Click);
             // 
             // WindowsForms
             // 
@@ -541,6 +589,10 @@ namespace WindowsFormsSchoolProject.Forms
         private System.Windows.Forms.Button btn_backgroundWorker;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Button btn_asyncTest;
+        private System.Windows.Forms.Button btn_changeLanguage;
+        private System.Windows.Forms.Button btn_changeLanguageEnglish;
+        private System.Windows.Forms.Button btn_printPreview;
 
     }
 }

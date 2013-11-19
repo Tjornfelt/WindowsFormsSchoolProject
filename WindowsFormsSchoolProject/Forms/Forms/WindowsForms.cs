@@ -14,6 +14,8 @@ using System.Diagnostics;
 using System.Xml.Serialization;
 using WindowsFormsSchoolProject.Helpers;
 using System.Threading;
+using WindowsFormsSchoolProject.Resources;
+using System.Globalization;
 
 namespace WindowsFormsSchoolProject.Forms
 {
@@ -46,6 +48,9 @@ namespace WindowsFormsSchoolProject.Forms
 
             databaseAvailable = en.IsDatabaseAvailable();
 
+            
+            
+
             //If the database is available...
             if (databaseAvailable)
             {
@@ -54,12 +59,22 @@ namespace WindowsFormsSchoolProject.Forms
                 List<User> userList = en.GetAllUsers();
 
                 bool inSync = true;
-                for (int i = 0; i < xmlUserList.Count(); i++)
+
+                //If the size of the lists are equal, we can loop through and compare directly
+                if (xmlUserList.Count() == userList.Count())
                 {
-                    if (xmlUserList[i].username  != userList[i].username || xmlUserList[i].email != userList[i].email || xmlUserList[i].id != userList[i].id)
+                    for (int i = 0; i < xmlUserList.Count(); i++)
                     {
-                        inSync = false;
+                        if (xmlUserList[i].username != userList[i].username || xmlUserList[i].email != userList[i].email || xmlUserList[i].id != userList[i].id)
+                        {
+                            inSync = false;
+                        }
                     }
+                }
+                else
+                {
+                    //If the size is different, we dont need to loop to figure out they are de-synced.
+                    inSync = false;
                 }
 
                 if (!inSync)
@@ -98,6 +113,7 @@ namespace WindowsFormsSchoolProject.Forms
 
         }
 
+        #region save file
         private void scSave_Click(object sender, EventArgs e)
         {
             PopupForm popup = new PopupForm();
@@ -123,12 +139,16 @@ namespace WindowsFormsSchoolProject.Forms
                 System.IO.File.WriteAllText(filePath, scRichText.Text);
             }
         }
+        #endregion
 
+        #region clear screen
         private void scClear_Click(object sender, EventArgs e)
         {
             scRichText.Text = string.Empty;
         }
+        #endregion
 
+        #region Open File Dialog
         private void scOpenFileDialog_FileOk(object sender, CancelEventArgs e)
         {
             string filePath = scOpenFileDialog.FileName;
@@ -150,11 +170,14 @@ namespace WindowsFormsSchoolProject.Forms
 
         }
 
+        
         private void scOpenFile_Click(object sender, EventArgs e)
         {
             scOpenFileDialog.ShowDialog();
         }
+        #endregion
 
+        #region Custom Controls
         private void mcCustomControl_Click(object sender, EventArgs e)
         {
             CustomControlsForm customControlsForm = new CustomControlsForm();
@@ -165,7 +188,9 @@ namespace WindowsFormsSchoolProject.Forms
 
             DialogResult dResult = customControlsForm.ShowDialog();
         }
+        #endregion
 
+        #region Generate/Save/Read Xml
         private void GenerateRawXml_Click(object sender, EventArgs e)
         {
             XmlDocument newDoc = new XmlDocument();
@@ -183,6 +208,7 @@ namespace WindowsFormsSchoolProject.Forms
 
             doc.LoadXml(xmlString);
         }
+
 
         private void ReadXml_Click(object sender, EventArgs e)
         {
@@ -203,7 +229,9 @@ namespace WindowsFormsSchoolProject.Forms
                 xmlTextBox.Text = "Remember to generate the xml first!";
             }
         }
+        #endregion
 
+        #region MDI forms (Multiple document interface)
         private void mDIFormsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MDIparent mdiParent = new MDIparent();
@@ -213,9 +241,10 @@ namespace WindowsFormsSchoolProject.Forms
             mdiParent.Size = new Size(500,500);
 
             mdiParent.Show();
-            
         }
+        #endregion
 
+        #region Print operations
         private void Print_Click(object sender, EventArgs e)
         {
             PrintDialog printDialog = new PrintDialog();
@@ -271,6 +300,24 @@ namespace WindowsFormsSchoolProject.Forms
             }
         }
 
+        private void btn_printPreview_Click(object sender, EventArgs e)
+        {
+            PrintPreviewDialog printPreviewDialog = new PrintPreviewDialog();
+            PrintDocument printDocument = new PrintDocument();                              //Create the actual document.
+            printDocument.PrintPage += printDocument_PrintPage;
+            printPreviewDialog.Document = printDocument;
+
+            DialogResult printResult = printPreviewDialog.ShowDialog();                        //Show the PrintDialog and save the users choice.
+
+            //User clicks 'OK'
+            if (printResult == DialogResult.OK)
+            {
+                printPreviewDialog.Document.Print();                                           //Use the PrintDialog to print the page. The Document has been thrown from object to object and now needs to be printed.
+            }
+        }
+        #endregion
+
+        #region Show all users
         private void showUsers_Click(object sender, EventArgs e)
         {
             Entity en = new Entity();
@@ -282,6 +329,7 @@ namespace WindowsFormsSchoolProject.Forms
                 scRichText.Text += item.username + Environment.NewLine;
 	        }
         }
+        #endregion
 
         private void scClickMe_MouseHover(object sender, EventArgs e)
         {
@@ -293,6 +341,7 @@ namespace WindowsFormsSchoolProject.Forms
 
         }
 
+        #region Onscreen Keyboard
         private void onscreenKeyboard_Click(object sender, EventArgs e)
         {
             try
@@ -304,6 +353,7 @@ namespace WindowsFormsSchoolProject.Forms
                 string err = error.ToString();
             }
         }
+        #endregion
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -315,6 +365,7 @@ namespace WindowsFormsSchoolProject.Forms
 
         }
 
+        #region New user
         private void newUser_Click(object sender, EventArgs e)
         {
             CreateUser createUser = new CreateUser(databaseAvailable);
@@ -326,7 +377,9 @@ namespace WindowsFormsSchoolProject.Forms
                 //TODO confirmation message
             }
         }
+        #endregion
 
+        #region Update Grid
         private void update_Click(object sender, EventArgs e)
         {
             if (databaseAvailable)
@@ -340,7 +393,9 @@ namespace WindowsFormsSchoolProject.Forms
                 dataGridView1.DataSource = XMLhelpers.FetchUsersFromXml();
             }
         }
+        #endregion
 
+        #region Delete user
         private void deleteUser_Click(object sender, EventArgs e)
         {
             DeleteUser deleteUser = new DeleteUser(databaseAvailable);
@@ -352,7 +407,9 @@ namespace WindowsFormsSchoolProject.Forms
                 //TODO confirmation message
             }
         }
+        #endregion
 
+        #region Edit user
         private void btn_editUser_Click(object sender, EventArgs e)
         {
             EditUser editUser = new EditUser(databaseAvailable);
@@ -364,7 +421,9 @@ namespace WindowsFormsSchoolProject.Forms
                 //TODO confirmation message
             }
         }
+        #endregion
 
+        #region Async using Background workers
         private void btn_backgroundWorker_Click(object sender, EventArgs e)
         {
             backgroundWorker1.RunWorkerAsync();
@@ -389,5 +448,51 @@ namespace WindowsFormsSchoolProject.Forms
         {
             progressBar1.Value = 0;
         }
+        #endregion
+
+        #region Async using delegates
+        //Create a new delegate
+        private delegate void MyDelegate(int a, int b);
+
+        //Create a new variable of type MyDelegate for later use
+        private MyDelegate myAsync;
+
+        private void SomeFunction(int a, int b)
+        {
+            for (var i = 0; i < 20; i++)
+            {
+                Thread.Sleep(100); // 1/10 second.
+            }
+            MessageBox.Show("Async operation has completed!");
+        }
+
+        private void btn_asyncTest_Click(object sender, EventArgs e)
+        {
+            //Assign a function to the delegate
+            myAsync = new MyDelegate(this.SomeFunction);
+
+
+            myAsync.BeginInvoke(5, 10, null, null);
+        }
+        #endregion
+
+        #region Resource files
+        private void btn_changeLanguage_Click(object sender, EventArgs e)
+        {
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("da-DK");
+
+            //The culture has been set to "da-DK". It will now look for a resource file called Sentence.da.resx
+            MessageBox.Show(Sentence.MySentence);
+        }
+
+        private void btn_changeLanguageEnglish_Click(object sender, EventArgs e)
+        {
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
+
+            //The culture has been set to "en-US". No file exists with Sentence.en.resx so it will use the default: Sentence.resx
+            MessageBox.Show(Sentence.MySentence);
+        }
+        #endregion
+
     }
 }
