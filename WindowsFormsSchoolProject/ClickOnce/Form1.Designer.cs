@@ -36,15 +36,15 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(13, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(171, 13);
+            this.label1.Size = new System.Drawing.Size(236, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "An amazing click-once application!";
+            this.label1.Text = "An amazing click-once application! New version!";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(199, 44);
+            this.ClientSize = new System.Drawing.Size(269, 44);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";

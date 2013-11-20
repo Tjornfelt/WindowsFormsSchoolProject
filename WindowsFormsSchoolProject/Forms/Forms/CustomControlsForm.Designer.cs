@@ -33,6 +33,7 @@
             // 
             // superButton1
             // 
+            this.superButton1.IsSuper = false;
             this.superButton1.Location = new System.Drawing.Point(13, 13);
             this.superButton1.Name = "superButton1";
             this.superButton1.Size = new System.Drawing.Size(75, 23);

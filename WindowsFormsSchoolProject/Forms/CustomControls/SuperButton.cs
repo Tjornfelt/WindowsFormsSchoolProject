@@ -27,14 +27,20 @@ namespace WindowsFormsSchoolProject.CustomControls
         //Override OnMouseEnter to give this custom control a unique function.
         protected override void OnMouseEnter(EventArgs e)
         {
-            this.Size = new System.Drawing.Size(150, 150);
-            base.OnMouseEnter(e);
+            if (IsSuper)
+            {
+                this.Size = new System.Drawing.Size(150, 150);
+                base.OnMouseEnter(e);
+            }
         }
 
         protected override void OnMouseLeave(EventArgs e)
         {
-            this.Size = new System.Drawing.Size(100, 35);
-            base.OnMouseLeave(e);
+            if (IsSuper)
+            {
+                this.Size = new System.Drawing.Size(100, 35);
+                base.OnMouseLeave(e);
+            }
         }
     }
 }

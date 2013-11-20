@@ -36,7 +36,11 @@ namespace WindowsFormsSchoolProject.Forms
 
         private void WindowsForms_Load(object sender, EventArgs e)
         {
+            
+
+
             appPath = Path.GetDirectoryName(Application.ExecutablePath);
+
             scText = "Congratulations! You clicked the button! " + Environment.NewLine +
                      "Now, enter some text and save it. It will be saved to a .txt file.";
 
@@ -54,6 +58,17 @@ namespace WindowsFormsSchoolProject.Forms
             //If the database is available...
             if (databaseAvailable)
             {
+                //Check if the users.xml file exists
+                string usersXml = @"\users.xml";
+                var usersXmlExists = File.Exists(appPath + usersXml);
+
+                //If it doesn't exist, and the database is available, create it with the values from the database
+                if (!usersXmlExists)
+                {
+                    XMLhelpers.SaveUsersToXml(en.GetAllUsers());
+                }
+
+
                 //If the users in the database and the xml document differs, update the database with the local data.
                 List<User> xmlUserList = XMLhelpers.FetchUsersFromXml();
                 List<User> userList = en.GetAllUsers();
@@ -97,6 +112,23 @@ namespace WindowsFormsSchoolProject.Forms
             {
                 this.Text += " - Offline mode";
                 MessageBox.Show("Can't connect to database. Starting in offline mode");
+
+                //Check if the users.xml file exists
+                string usersXml = @"\users.xml";
+                var usersXmlExists = File.Exists(appPath + usersXml);
+
+                //If it doesn't exist, and the database is not available, create it with a placeholder user
+                if (!usersXmlExists)
+                {
+                    List<User> placeholderUserList = new List<User>();
+
+                    User placeholderUser = new User();
+                    placeholderUser.id = 1;
+                    placeholderUser.username = "PlaceholderUser";
+                    placeholderUser.email = "PlaceholderEmail";
+                    placeholderUserList.Add(placeholderUser);
+                    XMLhelpers.SaveUsersToXml(placeholderUserList);
+                }
 
                 //In offline mode, all data is loaded from the local xml document.
                 dataGridView1.DataSource = XMLhelpers.FetchUsersFromXml();
@@ -273,7 +305,7 @@ namespace WindowsFormsSchoolProject.Forms
             int startX = 20;
             int startY = 20;
 
-            graphic.DrawString(scText, font, new SolidBrush(Color.Black), startX, startY);
+            graphic.DrawString(scRichText.Text, font, new SolidBrush(Color.Black), startX, startY);
         }
 
         private void printPreview_Click(object sender, EventArgs e)

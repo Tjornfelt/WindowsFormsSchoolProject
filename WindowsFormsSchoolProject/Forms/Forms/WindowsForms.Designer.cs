@@ -33,6 +33,9 @@ namespace WindowsFormsSchoolProject.Forms
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btn_printPreview = new System.Windows.Forms.Button();
+            this.btn_changeLanguageEnglish = new System.Windows.Forms.Button();
+            this.btn_changeLanguage = new System.Windows.Forms.Button();
             this.btn_asyncTest = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.btn_backgroundWorker = new System.Windows.Forms.Button();
@@ -65,8 +68,6 @@ namespace WindowsFormsSchoolProject.Forms
             this.scOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.btn_changeLanguage = new System.Windows.Forms.Button();
-            this.btn_changeLanguageEnglish = new System.Windows.Forms.Button();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.usernameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.emailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,7 +77,7 @@ namespace WindowsFormsSchoolProject.Forms
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.schoolwindowsformsEntities1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.schoolwindowsformsEntities1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.btn_printPreview = new System.Windows.Forms.Button();
+            this.userBindingSource4 = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -90,6 +91,7 @@ namespace WindowsFormsSchoolProject.Forms
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.schoolwindowsformsEntities1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.schoolwindowsformsEntities1BindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource4)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -129,6 +131,36 @@ namespace WindowsFormsSchoolProject.Forms
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Simple Controls";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // btn_printPreview
+            // 
+            this.btn_printPreview.Location = new System.Drawing.Point(10, 125);
+            this.btn_printPreview.Name = "btn_printPreview";
+            this.btn_printPreview.Size = new System.Drawing.Size(178, 23);
+            this.btn_printPreview.TabIndex = 15;
+            this.btn_printPreview.Text = "Print with preview (printpreview)";
+            this.btn_printPreview.UseVisualStyleBackColor = true;
+            this.btn_printPreview.Click += new System.EventHandler(this.btn_printPreview_Click);
+            // 
+            // btn_changeLanguageEnglish
+            // 
+            this.btn_changeLanguageEnglish.Location = new System.Drawing.Point(10, 363);
+            this.btn_changeLanguageEnglish.Name = "btn_changeLanguageEnglish";
+            this.btn_changeLanguageEnglish.Size = new System.Drawing.Size(178, 23);
+            this.btn_changeLanguageEnglish.TabIndex = 14;
+            this.btn_changeLanguageEnglish.Text = "Resource File - English";
+            this.btn_changeLanguageEnglish.UseVisualStyleBackColor = true;
+            this.btn_changeLanguageEnglish.Click += new System.EventHandler(this.btn_changeLanguageEnglish_Click);
+            // 
+            // btn_changeLanguage
+            // 
+            this.btn_changeLanguage.Location = new System.Drawing.Point(10, 333);
+            this.btn_changeLanguage.Name = "btn_changeLanguage";
+            this.btn_changeLanguage.Size = new System.Drawing.Size(178, 23);
+            this.btn_changeLanguage.TabIndex = 13;
+            this.btn_changeLanguage.Text = "Resource File - Danish";
+            this.btn_changeLanguage.UseVisualStyleBackColor = true;
+            this.btn_changeLanguage.Click += new System.EventHandler(this.btn_changeLanguage_Click);
             // 
             // btn_asyncTest
             // 
@@ -443,26 +475,6 @@ namespace WindowsFormsSchoolProject.Forms
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // btn_changeLanguage
-            // 
-            this.btn_changeLanguage.Location = new System.Drawing.Point(10, 333);
-            this.btn_changeLanguage.Name = "btn_changeLanguage";
-            this.btn_changeLanguage.Size = new System.Drawing.Size(178, 23);
-            this.btn_changeLanguage.TabIndex = 13;
-            this.btn_changeLanguage.Text = "Resource File - Danish";
-            this.btn_changeLanguage.UseVisualStyleBackColor = true;
-            this.btn_changeLanguage.Click += new System.EventHandler(this.btn_changeLanguage_Click);
-            // 
-            // btn_changeLanguageEnglish
-            // 
-            this.btn_changeLanguageEnglish.Location = new System.Drawing.Point(10, 363);
-            this.btn_changeLanguageEnglish.Name = "btn_changeLanguageEnglish";
-            this.btn_changeLanguageEnglish.Size = new System.Drawing.Size(178, 23);
-            this.btn_changeLanguageEnglish.TabIndex = 14;
-            this.btn_changeLanguageEnglish.Text = "Resource File - English";
-            this.btn_changeLanguageEnglish.UseVisualStyleBackColor = true;
-            this.btn_changeLanguageEnglish.Click += new System.EventHandler(this.btn_changeLanguageEnglish_Click);
-            // 
             // idDataGridViewTextBoxColumn
             // 
             this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
@@ -505,15 +517,9 @@ namespace WindowsFormsSchoolProject.Forms
             // 
             this.schoolwindowsformsEntities1BindingSource1.DataSource = typeof(WindowsFormsSchoolProject.school_windowsformsEntities1);
             // 
-            // btn_printPreview
+            // userBindingSource4
             // 
-            this.btn_printPreview.Location = new System.Drawing.Point(10, 125);
-            this.btn_printPreview.Name = "btn_printPreview";
-            this.btn_printPreview.Size = new System.Drawing.Size(178, 23);
-            this.btn_printPreview.TabIndex = 15;
-            this.btn_printPreview.Text = "Print with preview (printpreview)";
-            this.btn_printPreview.UseVisualStyleBackColor = true;
-            this.btn_printPreview.Click += new System.EventHandler(this.btn_printPreview_Click);
+            this.userBindingSource4.DataSource = typeof(WindowsFormsSchoolProject.User);
             // 
             // WindowsForms
             // 
@@ -541,6 +547,7 @@ namespace WindowsFormsSchoolProject.Forms
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.schoolwindowsformsEntities1BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.schoolwindowsformsEntities1BindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -593,6 +600,7 @@ namespace WindowsFormsSchoolProject.Forms
         private System.Windows.Forms.Button btn_changeLanguage;
         private System.Windows.Forms.Button btn_changeLanguageEnglish;
         private System.Windows.Forms.Button btn_printPreview;
+        private System.Windows.Forms.BindingSource userBindingSource4;
 
     }
 }
